@@ -14,7 +14,7 @@ define("VERSION", 'Version 1.1');
 $sqlFile = 'install.sql';
 
 if(file_exists("./install.lock")){
-	exit('锦尚中国提示您，若需重新安装请手动删除网站目录下install/install.lock文件!');
+	exit('你已经安装过此网站，若需重新安装请手动删除网站目录下install/install.lock文件!');
 }
 
 if (!is_readable('./' . $sqlFile)) {
@@ -23,7 +23,7 @@ if (!is_readable('./' . $sqlFile)) {
 }
 
 
-$Title = "Eduline在线教育系统";
+$Title = "在线教育系统";
 $Powered = "Powered by Eduline";
 $steps = array(
     '1' => '安装许可协议',

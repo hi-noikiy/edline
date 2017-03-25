@@ -604,6 +604,18 @@ class ConfigAction extends AdministratorAction {
         );
         $this->displayConfig ();
     }
+
+     /**
+     * 系统配置 - 卖家微信支付配置
+     */
+    public function weixinpay() {
+        $this->pageKeyList = array (
+                'weixinpay_partner',       //合作身份者id，以2088开头的16位纯数字
+                'weixin_email',         //卖家支付宝帐号
+                'weixinpay_key',           //安全检验码，以数字和字母组成的32位字符
+        );
+        $this->displayConfig ();
+    }
     /**
      * 系统配置 - 短信接口配置
      */

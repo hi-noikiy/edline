@@ -1116,5 +1116,6 @@ Label class does not exist',
 'PUBLIC_APPNAME_GROUP'=>'Group',
 'PUBLIC_APPNAME_EVENT'=>'Vote',
 'PUBLIC_APPNAME_EXAM'=>'Exam',
-'PUBLIC_APPNAME_LIVE'=>'Live'
+'PUBLIC_APPNAME_LIVE'=>'Live',
+'PUBLIC_APPNAME_DASHANG'=>'Dashang'
 );

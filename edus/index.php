@@ -12,7 +12,6 @@ if(is_dir('install/') && !file_exists('install/install.lock')){
 
 //载入核心文件
 require(SITE_PATH.'/core/core.php');
-require(SITE_PATH.'/config/core.php');
 //file_get_contents('http://'.$_SERVER['HTTP_HOST'].'/cleancache.php');
 if(isset($_GET['debug'])){
 	C('APP_DEBUG', true);
@@ -37,6 +36,7 @@ $mem_run_start = memory_get_usage();
 //实例化一个网站应用实例
 $App = new App();
 $App->run();
+
 $mem_run_end = memory_get_usage();
 $time_run_end = microtime(TRUE);
 

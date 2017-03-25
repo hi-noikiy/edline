@@ -87,6 +87,29 @@ class PassportAction extends CommonAction
 		$this->display();
 	}
 
+	
+
+
+	/**
+	 * 跳转用户登录
+	 * @return void
+	 */
+	public function up()
+	{
+		$this->display();
+	}
+
+	/**
+	 * 跳转用户注册
+	 * @return void
+	 */
+	public function log()
+	{
+		$this->display();
+	}
+
+
+
 	/**
 	 * 用户登录
 	 * @return void
@@ -94,8 +117,8 @@ class PassportAction extends CommonAction
 	public function doLogin() {
 		$login 		= addslashes($_POST['login_email']);
 		$password 	= trim($_POST['login_password']);
-		$remember	= intval($_POST['login_remember']);
-		$result 	= $this->passport->loginLocal($login,$password,$remember);
+		//$remember	= intval($_POST['login_remember']);
+		$result 	= $this->passport->loginLocal($login,$password);
 		if(!$result){
 			$status = 0; 
 			$info	= $this->passport->getError();
@@ -104,10 +127,12 @@ class PassportAction extends CommonAction
 			$status = 1;
 			$info 	= $this->passport->getSuccess();
 			//$data 	= ($GLOBALS['ts']['site']['home_url'])?$GLOBALS['ts']['site']['home_url']:0;
-			$data = U('index/Index/index');
+			$data = U('classroom/Index/index');
 		}
 
-		$this->ajaxReturn($data,$info,$status);
+		//$this->ajaxReturn($data,$info,$status);
+		//$this->display('');
+		redirect($data);
 	}	
 	
 	/**
@@ -116,7 +141,8 @@ class PassportAction extends CommonAction
 	 */
 	public function logout() {
 		$this->passport->logoutLocal();
-		$this->mzSuccess("退出成功！");
+		//$this->mzSuccess("退出成功！");
+		redirect(U('classroom/Index/index'));
 	}
 
 	/**
@@ -237,7 +263,10 @@ class PassportAction extends CommonAction
 			}
 	    }
 	}
-
+	/**
+	 * 通过邮箱找回密码
+	 * @return void
+	 */
 	public function doFindPasswordByEmailAgain(){
 		$_POST["email"]	= t($_POST["email"]);
 		$user =	model("User")->where('`email`="'.$_POST["email"].'"')->find();		
@@ -361,7 +390,7 @@ class PassportAction extends CommonAction
      * 登录或注册页面
      */
     public function regLogin(){
-        $data = $this->fetch("reg_login");
+        $data = $this->fetch("log");
         exit( json_encode($data) );
     }
     /**
@@ -375,7 +404,6 @@ class PassportAction extends CommonAction
                 echo 0;
                 exit;
         }else{
-
                 echo 1;
                 exit;
         }
@@ -437,13 +465,14 @@ class PassportAction extends CommonAction
     		exit();
     	}
     	$phone=$_POST['phone'];
+    	//dump($phone);die();
     	$res=M('user')->where(array('phone'=>$phone))->find();
     	if ($res) {
     		$this->mzError('此手机号已被注册,请更换！');
     	}
     	$rnum=rand(1000,9999);
         $cont="您本次获取的验证码为".$rnum."请在页面指定处填写，请勿随意告知其他任何人！如非本人操作，请忽略此信息！";
-    	$sendres=model('Sms')->send($phone,$cont);
+    	$sendres=model('Sms')->smsbao($phone,$cont);
     	if($sendres){
     		//将验证码存入session
     		$_SESSION['phoneverify']=$rnum;
@@ -452,8 +481,11 @@ class PassportAction extends CommonAction
     		$nowtime+=60;
     		$_SESSION['verifytime']=$nowtime;
     		$this->mzSuccess("发送成功，请注意查收！");
+    		//dump('发送成功，请注意查收！');die();
     	}else{
+    		//$this->mzError("发送失败");
     		$this->mzError(model('Sms')->getError());
+    		//dump(model('Sms')->getError());die();
     	}
     	
     }

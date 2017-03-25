@@ -1,9 +1,119 @@
 <include file="__THEME__/_header" />
-<php>if(empty($_SESSION['mid'])){</php>
-	<include file="__THEME__/reg_login" />
-<php>}</php>
+		<!--==Header==-->
+		<div class="header">
+			<div class="nav-header wrap clearfix">
+				<h1 class="logo fl">
+					<a href="javascript:void(0);">
+						<img src="{$site.logo_head}" alt="教育" width="100" height="50">
+					</a>
+				</h1>
+				<!-- 头部导航 -->
+				<ul class="nav fl">
+				<volist name="site_top_nav" id="vo">
+						<if condition="$vo.app_name eq more">
+							<li class="nav-more rel">
+								<a href="javascript:void(0);">{$vo['navi_name']}</a>
+								<ul class="abs">
+								<volist name="vo['child']" id="val">
+										<li><a target="{$val['target']}" href="{$val['url']}" >{$val['navi_name']}</a></li>
+								</volist>
+								</ul>
+							</li>
+						<else/>
+							<li <php>if(APP_NAME == $vo['app_name'] || ( APP_NAME == 'classroom' && MODULE_NAME == $vo['app_name'] ) ){echo "class='active'";}</php> ><a target="{$vo['target']}" href="{$vo['url']}" >{$vo['navi_name']}</a></li>
+						</if>
+					</volist>
+						<php>if(!empty($_SESSION['mid'])){</php>
+							<li <php>if(MODULE_NAME == "Home" || MODULE_NAME=="User"){echo "class='active'";}</php> ><a href="{:U('classroom/Home/video')}">管理中心</a></li>
+						<php>}</php>
+				</ul>
+				<!-- 头部导航end -->
+				<!--==用户未登录==-->
+				<php>if(empty($_SESSION['mid'])){</php>
+				<ul class="nav-up-0 fr clearfix">
+					<li><a href="{:U('public/Passport/up')}">登录</a></li>
+					<li>&nbsp;&nbsp;/&nbsp;&nbsp;</li>
+					<li><a href="{:U('public/Passport/log')}">注册</a></li>
+				</ul>
+				<!--==用户未登录 end==-->
+				<php>}else{</php>
+				<div class="nav-up-1 fr clearfix">
+					<div class="XiTong fl">
+						<a href="#" class="icon-bell TiShi"></a>
+						<ul class="hore-pd">
+							<li>
+								<a href="#" class="clearfix">
+									<span>系统消息</span>
+									<i>1</i>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="clearfix">
+									<span>系统消息</span>
+									<i>1</i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- 系统消息end -->
+					<!--====用户====-->
+					<div class="yong-hu fl">
+						<div class="tou-xiang rel">
+							<a href="{:U('classroom/UserShow/index',array('uid'=>$_SESSION['mid']))}" class="T-a">
+								<img src="{:getUserFace($_SESSION['mid'])}" width="50px" height="50px;">
+							</a>
+							<ul class="hore-pd-YH">
+								<li>
+									<a href="{:U('classroom/Home/wenda')}" class="clearfix">
+										<span>我的问答</span>
+									</a>
+								</li>
+								<li>
+									<a href="{:U('classroom/Home/note')}" class="clearfix">
+										<span>我的笔记</span>
+									</a>
+								</li>
+								<li>
+									<a href="{:U('classroom/User/setInfo')}" class="clearfix">
+										<span>我的设置</span>
+									</a>
+								</li>
+								<li>
+									<a href="{:U('public/Message/index')}" class="clearfix">
+										<span>我的消息</span>
+									</a>
+								</li>
+								<li>
+									<a href="{:U('public/Passport/logout')}" onClick="logout()" class="clearfix">
+										<span>退出</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					</div>
+
+					<php>}</php>
+					<!--====用户end====-->
+								<!-- 搜索框 -->
+				<div class="nav-form fr">
+					<form action="" method="get">
+						<button class="icon-search"></button>
+						<input type="hidden" name="app" value="classroom" >
+				        <input type="hidden" name="mod" value="Search" >
+				        <input type="hidden" name="act" value="index" >
+						<input type="text" name="q" placeholder="搜索贴子、用户或课程..." title="搜索贴子、用户或课程...">
+					</form>
+				</div>
+				<!-- 搜索框end -->
+			</div>
+		</div>
+
+		<!--==Header end==-->
+
+
 <!--header-->
-<div class="header">
+<!-- <div class="header">
     <div class="header-top">
     	<div class="wrap">
             <div class="header-logo">
@@ -39,7 +149,7 @@
 					     </dl>
 	                </div>
 	                <!--消息提示-->
-				    <ul class="news-msg"
+				   <!--  <ul class="news-msg"
 				          <php>if(!empty($mid) &&(!empty($unreadnum) || !empty($systemnum) || !empty($commentnum))){</php>
 				          		style="display:block;"
 				          <php>}else{</php>
@@ -56,8 +166,8 @@
 				                <li>{$commentnum}条新的评论消息，&nbsp;<a href="{:U('public/Message/comment')}">查看消息</a></li>
 				         <php>}</php>
 				     </ul>
-			    <php>}</php>
-                
+			    <php>}</php> -->
+           <!--      
             </div>
         </div>
     </div>
@@ -87,7 +197,7 @@
     </div>
 </div>
 <!--右边浮动-->
-<php> $videolisturl =  $mid ? U('classroom/Video/merge') :  "javascript:reg_login();"; </php>
+<!-- <php> $videolisturl =  $mid ? U('classroom/Video/merge') :  "javascript:reg_login();"; </php>
 <div id="albumShop" class="shopfixed"> 
 	<a href="<php>echo $videolisturl;</php>" class="shop">&nbsp; 
 		<span id="albumNum" class="shop-msg">
@@ -100,20 +210,21 @@
 	</a> 
 	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$site.site_qq}&site=www.51eduline.com&menu=yes"   class="qa">&nbsp;</a> 
 	<a href="#" class="wx">&nbsp;<div class="erwm"><img  src="{:getAttachUrlByAttachId($site['site_qrcode'])}"><i></i></div></a> 
-</div>
+</div> -->
+<!-- 
+// <script>
+// function mouseup(cate){
+//   var left=$(cate).offset().left;
+//   $("#menu_box").css("display","block");
+// }
+// function mouseout(cate){
+//   $("#menu_box").css("display","none");
+// }
 
-<script>
-function mouseup(cate){
-  var left=$(cate).offset().left;
-  $("#menu_box").css("display","block");
-}
-function mouseout(cate){
-  $("#menu_box").css("display","none");
-}
-
-function closeMsg(){
-    $(".news-msg").remove();
-}
+// function closeMsg(){
+//     $(".news-msg").remove();
+// }
 
 </script>
 
+ -->

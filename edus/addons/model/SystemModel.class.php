@@ -21,7 +21,7 @@ class SystemModel
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($curl, CURLOPT_POST, 1);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($siteData));
-		$result = curl_exec($curl);
+		// $result = curl_exec($curl);
 		curl_close($curl);
 		// 解析数据
 		$result = unserialize($result);

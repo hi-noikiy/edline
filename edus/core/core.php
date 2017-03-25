@@ -150,8 +150,7 @@ function tsautoload($classname) {
 	}
 	return ;
 }
-// define('SITE_PATH', dirname(__FILE__));
-require(SITE_PATH.'/config/core.php');
+
 /**
  * 定义常量,判断是否未定义.
  *

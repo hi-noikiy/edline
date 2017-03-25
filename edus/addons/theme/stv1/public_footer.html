@@ -1,5 +1,114 @@
+        <!-- ==footer== -->
+        <div class="foot-bg">
+            <div class="wrap clearfix">
+                <div class="foot-left fl">
+                    <ul class="foot-list clearfix">
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">媒体报道</a></li>
+                        <li><a href="#">公司账号</a></li>
+                    </ul>
+                    <ul class="foot-lian-jie clearfix">
+                        <span class="fl">友情链接：</span>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">媒体报道</a></li>
+                        <li><a href="#">公司账号</a></li>
+                        <li><a href="#">公司账号</a></li>
+                        <li><a href="#">公司账号</a></li>
+                        <li><a href="#">公司账号</a></li>
+                    </ul>
+                    <p>Copyright © 2013-2017 广州邢帅教育科技有限公司 粤ICP备13040992号</p>
+                </div>
+                <div class="fr clearfix foot-right">
+                    <dl>
+                        <dt><img src="__APP__/images/erwei1.png" width="130"></dt>
+                        <dd>扫一扫下载APP</dd>
+                    </dl>
+                    <dl>
+                        <dt><img src="__APP__/images/erwei1.png" width="130"></dt>
+                        <dd>扫一扫下载APP</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="wrap"></div>
+        </div>
+        <!-- ==footer  end== -->
+
+
+        <script type="text/javascript">
+        $(function(){
+            //图片个数
+            imgLength=$(".banner li").length;
+            //图片宽度
+            imgWidth=$(window).width();
+            $(".banner_wrap").width(imgWidth);
+            $(".banner li").width(imgWidth);
+            $(".banner").width(imgLength*imgWidth);
+            //第一页引用current
+            $(".page a:first").addClass("active");
+            $(".page a").mouseover(function(){
+                    $(this).addClass("active").siblings("a").removeClass("active");
+                    index1=$(this).index();
+                    $(".banner").stop().animate({left:"-"+(imgWidth*index1)},600);  
+                });
+                function scrolls(){
+                    if($(".page a:last").hasClass("active")){
+                        naxt=0;
+                    }else{
+                        naxt=$(".active").index()+1;    
+                    }
+                        $(".page a").eq(naxt).triggerHandler("mouseover");
+                    }
+                    var t=setInterval(scrolls,2000);        
+                //鼠标经过大图，停止自动切换
+                $(".banner_wrap").mouseover(function(){
+                    clearInterval(t)
+                }).mouseout(function(){
+                    t=setInterval(scrolls,2000);
+                })
+            });
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            $(".nav-up-1 .TiShi").mouseover(function(){
+                $(".nav-up-1 .TiShi").removeClass("icon-bell").addClass("icon-bell-alt");
+            })
+            $(".nav-up-1 .TiShi").mouseout(function(){
+                $(".nav-up-1 .TiShi").removeClass("icon-bell-alt").addClass("icon-bell");
+            })
+        })
+        $(function(){
+            $(".XiTong").mouseover(function(){
+                $(".hore-pd").css("display","block");
+            })
+            $(".XiTong").mouseout(function(){
+                $(".hore-pd").css("display","none");
+            })
+        })
+        $(function(){
+            $(".yong-hu").mouseover(function(){
+                $(".hore-pd-YH").css("display","block");
+            })
+            $(".yong-hu").mouseout(function(){
+                $(".hore-pd-YH").css("display","none");
+            })
+        })
+        $(function(){
+            $(".nav-more a").mouseover(function(){
+                $(".nav-more ul").show();
+            })
+            $(".nav-more").mouseout(function(){
+                $(".nav-more ul").hide();
+            })
+        })
+    </script>
+</body>
+</html>
 <!--footer-->
-<div class="footer">
+<!-- <div class="footer">
 	<div class="wrap">
     	<div class="footer-main">
         	<div class="footer-logo">
@@ -25,22 +134,22 @@
         </div>
     </div>
     <div class="copyright">{$site['site_footer']}</div>
-</div>
+</div> -->
 
 <!-- 统计代码-->
-<div id="site_analytics_code" style="display:none;">
+<!-- <div id="site_analytics_code" style="display:none;">
 {$site.site_analytics_code|base64_decode}
 </div>
 <eq name='site.site_online_count' value='1'>
 <script src="{:SITE_URL}/online_check.php?uid={$mid}&uname={$user.uname}&mod={:MODULE_NAME}&app={:APP_NAME}&act={:ACTION_NAME}&action=trace"></script>
-</eq>
+</eq> -->
 
 
 <!--百度推广网页转化-->
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F9efa5e6b982a815a97700d8e78129b16' type='text/javascript'%3E%3C/script%3E"));
-</script>
+<!--  <script type="text/javascript">
+// var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+// document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F9efa5e6b982a815a97700d8e78129b16' type='text/javascript'%3E%3C/script%3E"));
+// </script>
 
-</body>
-</html>
+// </body>
+</html> -->

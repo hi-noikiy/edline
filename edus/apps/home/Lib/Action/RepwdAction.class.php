@@ -101,7 +101,7 @@ tsload(APPS_PATH.'/classroom/Lib/Action/CommonAction.class.php');
 		/**
 		 * 修改密码操作
 		 */
-	/* 	public function repwdhandle(){
+	 	/*public function repwdhandle(){
 			$phone = trim($_POST['phone']);
 			$pwd = trim($_POST['pwd']);
 			$repwd = trim($_POST['repwd']);
@@ -122,5 +122,5 @@ tsload(APPS_PATH.'/classroom/Lib/Action/CommonAction.class.php');
 			//清楚用户的缓存
 			$res && model('User')->cleancache($uid);
 			$res !== false ? exit('ok') : exit('密码更改失败');
-		} */
+		}*/
 	}

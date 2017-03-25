@@ -83,10 +83,34 @@ class IndexAction extends CommonAction {
         }
         $time = time();
         //根据销售最佳读取最佳讲师等信息
-        $beVideos = M()->query("SELECT zv.`id`, zv.`teacher_id`,zv.`video_title`,zt.`name`,zt.`inro`,zt.`head_id` FROM `".C('DB_PREFIX')."zy_video` zv,`".C('DB_PREFIX')."zy_teacher` zt WHERE zv.teacher_id=zt.id AND zt.id AND zt.is_del=0 and zv.`is_del`=0 AND `is_activity`=1 AND `uctime`>'$time' AND `listingtime`<'$time' and teacher_id >0 GROUP BY `teacher_id` ORDER BY `video_order_count` DESC ,`id` DESC  LIMIT 4");
+        $beVideos = M()->query("SELECT zv.`id`, zv.`teacher_id`,zv.`video_title`,zt.`name`,zt.`title`,zt.`inro`,zt.`head_id` FROM `".C('DB_PREFIX')."zy_video` zv,`".C('DB_PREFIX')."zy_teacher` zt WHERE zv.teacher_id=zt.id AND zt.id AND zt.is_del=0 and zv.`is_del`=0 AND `is_activity`=1 AND `uctime`>'$time' AND `listingtime`<'$time' and teacher_id >0 GROUP BY `teacher_id` ORDER BY `video_order_count` DESC ,`id` DESC  LIMIT 4");
+        // dump($beVideos);
+        //     die();
         if(!$beVideos){
-            $beVideos = M()->query("SELECT `id` as teacher_id,`name`,`inro`,`head_id` FROM `".C('DB_PREFIX')."zy_teacher` WHERE is_del=0 and course_count>0 order by `id` DESC  LIMIT 4");
+            $beVideos = M()->query("SELECT id as teacher_id,name,title,inro,head_id FROM el_zy_teacher WHERE is_del=0 and course_count=0 order by id DESC LIMIT 4");
+
         }
+        // 获取最新课程
+        $video_table =  C('DB_PREFIX') . 'zy_video';
+        $cate_table = C('DB_PREFIX') . 'zy_video_category';
+        // $newVideos = M()->query("select * from {$video_table} order by `listingtime` desc limit 8");
+        // $cover_table =  C('DB_PREFIX') . 'attach';
+        $teacher_table = C('DB_PREFIX') . 'zy_teacher';
+        $sql="select {$video_table}.id as vid,{$video_table}.t_price as vprice,{$video_table}.video_title as vintro,{$video_table}.cover as vcover,{$teacher_table}.id as tid,{$teacher_table}.name as tname from {$video_table},{$teacher_table} where {$teacher_table}.id={$video_table}.teacher_id and `listingtime`<'$time' and `uctime`>'$time' order by `listingtime` desc limit 8";
+        // echo $sql;
+        $cover = M()->query($sql);
+
+
+        // 加载热门课程
+        $video = M()->query("select {$video_table}.id as vid,{$video_table}.t_price as vprice,{$video_table}.video_title as vintro,{$video_table}.cover as vcover,{$teacher_table}.id as tid,{$teacher_table}.name as tname,{$teacher_table}.graduate_school as school from {$cate_table},{$video_table},{$teacher_table} where {$teacher_table}.id={$video_table}.teacher_id and {$cate_table}.zy_video_category_id={$video_table}.video_category");
+        // $cover = M()->query("select * from {$cover_table} where attach_id={$newVideos['cover']}");
+        // $lis= D('ZyVideo')->getVideosList(8);
+        // print_r($cover);
+        // print_r($video);
+        // exit;
+        // 分配数据
+        $this->assign('videos',$video);
+        $this->assign("cover",$cover);
         $this->assign("wenda", $wenda);
         $this->assign("beTeacher", $beVideos);
         $this->assign("ad_list", $ad_list);

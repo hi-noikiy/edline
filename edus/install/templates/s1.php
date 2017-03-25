@@ -11,9 +11,9 @@
             <div class="section">
                 <div class="main cc">
                     <pre class="pact" readonly="readonly">
-版权所有 (C) 2015-<?php echo date('Y');?>，<a href="http://www.84922.com" target="_blank">小鱼源码论坛</a>保留所有权利。
+版权所有 (C) 2015-<?php echo date('Y');?>，<a href="http://51eduline.com" target="_blank">Eduline</a>保留所有权利。
 <b>Eduline</b>是基于ThinkSNS核心组件独立开发的在线教育程序，基于PHP脚本和MySQL数据库。
-官方网址： <a href="http://www.84922.com" target="_blank">www.84922.com</a> 在线演示： <a href="http://www.84922.com" target="_blank">www.84922.com</a>
+官方网址： <a href="http://51eduline.com" target="_blank">www.51eduline.com</a> 在线演示： <a href="http://demo.51eduline.com" target="_blank">demo.51eduline.com</a>
 为了使你正确并合法的使用本软件，请你在使用前务必阅读清楚下面的协议条款：
     感谢您选择“Eduline在线教育系统”（简称Eduline），Eduline在线教育系统致力于为用户提供全面的在线教育、视频及社交的解决方案。
 赛新科技有限公司为Eduline在线教育系统产品的开发商，依法独立拥有Eduline在线教育系统产品著作权。赛新科技有限公司网址为<a href="http://www.seition.com" target="_blank">http://www.seition.com</a>，Eduline在线教育系统官方网站网址为<a href="http://51eduline.com" target="_blank">www.51eduline.com</a>。

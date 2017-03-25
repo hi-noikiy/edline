@@ -44,7 +44,8 @@ class AppsAction extends AdministratorAction
 
 		$inNav = $this->navList;
 		
-
+		// var_dump($listData['data']);
+		// exit;
 		foreach($listData['data'] as &$v){
 
 			// $v['icon_url'] = empty($v['icon_url']) ? '<img src="'.APPS_URL.'/'.$v['app_name'].'/Appinfo/icon_app.png" >' : "<img src='{$v['icon_url']}'>";
